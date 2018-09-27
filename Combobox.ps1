@@ -44,17 +44,14 @@ $ComboBox1.AutoCompleteMode        ='SuggestAppend'
 foreach($c in $countries){$ComboBox1.AutoCompleteCustomSource.AddRange($c)}
 $choice = $ComboBox1.Text
 
-######## If Combobox test -eq Azerbaijan then enable button ###############
-
-$Button1.Enabled = $false
+######## If Combobox text is different from list or null ###############
 
 $ComboBox1.add_TextChanged({Combobox})
 function Combobox{
-if ($ComboBox1.Text -eq 'azerbaijan')
-{$Button1.Enabled = $true}
-else {$Button1.Enabled = $false}
+if ($ComboBox1.SelectedItem -eq $null)
+{$Button1.Enabled = $false}
+else {$Button1.Enabled = $true}
 }
-
 
 
 $Form.controls.AddRange(@($ComboBox1,$Button1))
