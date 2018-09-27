@@ -37,7 +37,7 @@ $ComboBox1.SelectedIndex = 1
 
 
   
-##############   AutoComplite from File in Organization Units. #################
+##############   AutoComplite from File. #################
 
 $ComboBox1.AutoCompleteSource      ='CustomSource'
 $ComboBox1.AutoCompleteMode        ='SuggestAppend'
