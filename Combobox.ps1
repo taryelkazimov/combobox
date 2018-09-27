@@ -1,4 +1,4 @@
-﻿<# This form was created using POSHGUI.com  a free online gui designer for PowerShell
+<# This form was created using POSHGUI.com  a free online gui designer for PowerShell
 .NAME
     Untitled
 #>
@@ -27,10 +27,11 @@ $Button1.height                  = 81
 $Button1.location                = New-Object System.Drawing.Point(101,209)
 $Button1.Font                    = 'Microsoft Sans Serif,10'
 
+
 ##############   DropDown #################
 
 $ComboBox1.DropDownStyle  = [System.Windows.Forms.ComboBoxStyle]::DropDown;
-$countries = Get-content $PSScriptRoot\list.txt
+$countries = @(Get-content $PSScriptRoot\list.txt)
 foreach($c in $countries){$ComboBox1.Items.add($c)}
 $ComboBox1.SelectedIndex = 1
 
@@ -41,16 +42,25 @@ $ComboBox1.SelectedIndex = 1
 $ComboBox1.AutoCompleteSource      ='CustomSource'
 $ComboBox1.AutoCompleteMode        ='SuggestAppend'
 foreach($c in $countries){$ComboBox1.AutoCompleteCustomSource.AddRange($c)}
-$choice = $ComboBox1.SelectedItem
+$choice = $ComboBox1.Text
 
+######## If Combobox test -eq Azerbaijan then enable button ###############
 
+$Button1.Enabled = $false
 
+$ComboBox1.add_TextChanged({Combobox})
+function Combobox{
+if ($ComboBox1.Text -eq 'azerbaijan')
+{$Button1.Enabled = $true}
+else {$Button1.Enabled = $false}
+}
 
 
 
 $Form.controls.AddRange(@($ComboBox1,$Button1))
 
 #region gui events {
+
 $Button1.Add_Click({
     $choice = $ComboBox1.SelectedItem
     Add-Type -AssemblyName PresentationCore,PresentationFramework
